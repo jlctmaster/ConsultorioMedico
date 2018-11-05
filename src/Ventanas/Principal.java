@@ -5,7 +5,6 @@
  */
 package Ventanas;
 
-
 import Clases.Panel_Fondo;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
@@ -29,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
         }
 
         initComponents();
-    //    this.setResizable(false);
+        //    this.setResizable(false);
 
         Especialidad.setVisible(false);
         Medico.setVisible(false);
@@ -82,8 +81,8 @@ public class Principal extends javax.swing.JFrame {
             Reporte.setVisible(true);
         }
 
-        this.setVisible(true);
-        this.toFront();
+//        this.setVisible(true);
+//        this.toFront();
     }
 
     /**
@@ -496,14 +495,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
-int opcion = JOptionPane.showConfirmDialog(this,"Esta seguro que desea cerrar sesion?","Cerrar sesion",JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION);
 
-
-if(opcion==JOptionPane.YES_OPTION){
-    InicioSesion IS = new InicioSesion(null, false);
-    IS.setVisible(true);
-    this.dispose();
-}
+        if (opcion == JOptionPane.YES_OPTION) {
+            InicioSesion IS = new InicioSesion(null, false);
+            IS.setVisible(true);
+            this.dispose();
+        }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing

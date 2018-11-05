@@ -81,6 +81,11 @@ public class InicioSesion extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Iniciar Sesion");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Usuario");
 
@@ -169,8 +174,7 @@ ResultSet resultado;
 
             try {
                 Conexion C = new Conexion();
-                
-                
+
                 C.Conectar(Credenciales.UserPass.User, Credenciales.UserPass.Pass);
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println(ex.getMessage());
@@ -203,6 +207,9 @@ ResultSet resultado;
             Principal.setID_Usuario(ID_Usuario);
             P.Iniciar(Rol.trim());
             this.setVisible(false);
+
+            P.setVisible(true);
+            P.toFront();
 
         } else {
             JOptionPane.showMessageDialog(this, "Ingrese usuario y contrasena", "Ingrese", JOptionPane.ERROR_MESSAGE);
@@ -241,6 +248,10 @@ ResultSet resultado;
 
 // TODO add your handling code here:
     }//GEN-LAST:event_txtUserKeyTyped
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.exit(0);         // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
