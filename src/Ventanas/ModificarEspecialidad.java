@@ -175,9 +175,9 @@ public class ModificarEspecialidad extends javax.swing.JDialog {
         String Nombre = txtNombre.getText().trim();
         String Descripcion = txtDescripcion.getText().trim();
         
-        if("".equals(Nombre)||"".equals(Descripcion)){
+        if("".equals(Nombre)) {//||"".equals(Descripcion)){ //Comentado por dperez Issue 3
                  JOptionPane.showMessageDialog
-        (this, "Complete todos los campos","Complete",JOptionPane.ERROR_MESSAGE);
+        (this, "Ingrese el Nombre de la Especialidad","Complete",JOptionPane.ERROR_MESSAGE);
          
         }
         else{
