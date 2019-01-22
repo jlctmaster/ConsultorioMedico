@@ -47,7 +47,7 @@ public class AgregarEspecialidad extends javax.swing.JInternalFrame {
         setTitle("Agregar Especialidad");
 
         jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel7.setText("Nombre");
+        jLabel7.setText("(*) Nombre"); //dperez agrego el (*)
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -56,7 +56,7 @@ public class AgregarEspecialidad extends javax.swing.JInternalFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel11.setText("Descripcion");
+        jLabel11.setText("Descripción");
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
@@ -150,14 +150,15 @@ public class AgregarEspecialidad extends javax.swing.JInternalFrame {
         String Nombre = txtNombre.getText().trim();
         String Descripcion = txtDescripcion.getText().trim();
         
-        if("".equals(Nombre)||"".equals(Descripcion)){
+        if("".equals(Nombre)){//||"".equals(Descripcion)){ //dperez Descripcion no es obligatorio
                  JOptionPane.showMessageDialog
-        (this, "Complete todos los campos","Complete",JOptionPane.ERROR_MESSAGE);
-         
+        //(this, "Complete todos los campos","Complete",JOptionPane.ERROR_MESSAGE); //dperez Issue 3
+                 (this, "Ingrese el Nombre de la Especialidad","Complete",JOptionPane.ERROR_MESSAGE);
+                 
         }
         else{
             Especialidad.Agregar_Especialidad(Nombre, Descripcion);
-            Limpiar();
+            //Limpiar(); //Quitado por dperez Issue 3
         }
     }
     
@@ -176,7 +177,8 @@ this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-Limpiar();        // TODO add your handling code here:
+    	Guardar(); //Agregado por dperez Issue 3
+    	Limpiar();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
