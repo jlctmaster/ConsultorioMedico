@@ -22,10 +22,10 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
 
-       // try {
-           // this.setIconImage(new ImageIcon(getClass().getResource("/Images/dr-icon.png")).getImage());
-        //} catch (NullPointerException ex) {
-        //}
+        try {
+            this.setIconImage(new ImageIcon(getClass().getResource("/Images/dr-icon.png")).getImage());
+        } catch (NullPointerException ex) {
+        }
 
         initComponents();
         //    this.setResizable(false);
