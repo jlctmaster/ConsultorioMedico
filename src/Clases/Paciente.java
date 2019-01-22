@@ -25,22 +25,21 @@ public static void Agregar_Paciente(String Nombre, String Apellido, float Peso, 
 
     
         try {
+        	CallableStatement consulta = Conexion.con.prepareCall("{call AgregarPaciente (?,?,?,?,?,?,?,?,?)}");
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call AgregarPaciente (?,?,?,?,?,?,?,?,?)}");
+            
+            consulta.setString(1, Nombre);
+            consulta.setString(2, Apellido);
+            consulta.setFloat(3, Peso);
+            consulta.setFloat(4, Altura);
+            consulta.setInt(5, Edad);
+            consulta.setString(6, Alergias);
+            consulta.setString(7, Enfermedades);
+            consulta.setString(8, TipoSangre);
+            consulta.setString(9, Telefono);
+            
 
-           
-                        consulta.setString(1, Nombre);
-                        consulta.setString(2, Apellido);
-                        consulta.setFloat(3, Peso);
-                        consulta.setFloat(4, Altura);
-                        consulta.setInt(5, Edad);
-                        consulta.setString(6, Alergias);
-                        consulta.setString(7, Enfermedades);
-                        consulta.setString(8, TipoSangre);
-                        consulta.setString(9, Telefono);
-                        
-  
-                        consulta.execute();
+            consulta.execute();
 
          JOptionPane.showMessageDialog(null,"Datos del Paciente guardado correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 
@@ -61,25 +60,24 @@ public static void Actualizar_Paciente(int ID, String Nombre, String Apellido, f
     
     
         try {
+        	CallableStatement consulta = Conexion.con.prepareCall("{call ModificarPaciente (?,?,?,?,?,?,?,?,?) }");
 
-        CallableStatement consulta = Conexion.con.prepareCall("{call ModificarPaciente (?,?,?,?,?,?,?,?,?,?) }");
+            consulta.setInt(1,ID);
+            consulta.setString(2, Nombre);
+            consulta.setString(3, Apellido);
+            consulta.setFloat(4, Peso);
+            consulta.setFloat(5, Altura);
+            consulta.setInt(6,Edad);
+            consulta.setString(7, Alergias);
+            consulta.setString(8, Enfermedades);
+            consulta.setString(9, TipoSangre);
+            consulta.setString(10, Telefono);
+            
+           
 
-                        consulta.setInt(1,ID);
-                        consulta.setString(2, Nombre);
-                        consulta.setString(3, Apellido);
-                        consulta.setFloat(4, Peso);
-                        consulta.setFloat(5, Altura);
-                        consulta.setInt(6,Edad);
-                        consulta.setString(7, Alergias);
-                        consulta.setString(8, Enfermedades);
-                        consulta.setString(9, TipoSangre);
-                        consulta.setString(10, Telefono);
-                        
-                       
+            consulta.execute();
 
-                        consulta.execute();
-
-         JOptionPane.showMessageDialog(null,"Datos del Paciente Actualizados Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+         JOptionPane.showMessageDialog(null,"Datos del Paciente Actualizados Correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException ex) {
 
@@ -98,7 +96,7 @@ public static void Activar_Paciente(int ID){
 
                consulta.setInt(1, ID);
                consulta.execute();
-      JOptionPane.showMessageDialog(null,"Activado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE); 
+      JOptionPane.showMessageDialog(null,"Activado Correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE); 
             
             
   
@@ -119,7 +117,7 @@ public static void Desactivar_Paciente(int ID){
 
                consulta.setInt(1, ID);
                consulta.execute();
-     JOptionPane.showMessageDialog(null,"Desactivado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE); 
+     JOptionPane.showMessageDialog(null,"Desactivado Correctamente","Informacion",JOptionPane.INFORMATION_MESSAGE); 
          
   
     }catch(SQLException ex){

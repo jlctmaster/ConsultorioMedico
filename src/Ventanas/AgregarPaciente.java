@@ -8,6 +8,8 @@ package Ventanas;
 import Clases.Conexion;
 import Clases.Medico;
 import Clases.Paciente;
+
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
@@ -85,7 +87,8 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel7.setText("Nombres");
+        jLabel7.setText("* Nombres");
+        jLabel7.setBackground(new Color(255, 0, 0));
 
         txtNombre.setDoubleBuffered(true);
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -95,8 +98,8 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel10.setText("Apellidos");
-
+        jLabel10.setText("* Apellidos");
+        jLabel10.setBackground(new Color(255, 0, 0));
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtApellidoKeyTyped(evt);
@@ -104,15 +107,17 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel9.setText("Peso");
+        jLabel9.setText("* Peso");
+        jLabel9.setBackground(new Color(255, 0, 0));
 
         jLabel13.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel13.setText("Tipo de Sangre");
+        jLabel13.setText("* Tipo de Sangre");
+        jLabel13.setBackground(new Color(255, 0, 0));
 
         cmbSangre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
 
         jLabel14.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel14.setText("Alergias");
+        jLabel14.setText(" Alergias");
 
         txtPeso.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -130,14 +135,15 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtAlergia);
 
         jLabel15.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel15.setText("Enfermedades");
+        jLabel15.setText(" Enfermedades");
 
         txtEnfermedad.setColumns(20);
         txtEnfermedad.setRows(5);
         jScrollPane2.setViewportView(txtEnfermedad);
 
         jLabel11.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel11.setText("Altura");
+        jLabel11.setText("* Altura");
+        jLabel11.setBackground(new Color(255, 0, 0));
 
         txtAltura.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -146,7 +152,8 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel12.setText("Edad");
+        jLabel12.setText("* Edad");
+        jLabel12.setBackground(new Color(255, 0, 0));
 
         txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -155,10 +162,14 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
         });
 
         jLabel16.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel16.setText("Telefono");
+        jLabel16.setText("* Telefono");
+        jLabel16.setBackground(new Color(255, 0, 0));
+        
+       
 
         try {
-            txtTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        	// Se amplio la mascara del campo para que acepten 12 registros Issue 6
+        	txtTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -209,11 +220,14 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                	//.addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                
                 .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,31 +317,63 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void Guardar(){
+    	/**
+    	 *  @author Diego-18
+    	 *  
+    	 *  Guardar con su respectiva validacion de campos vacios
+    	 *  Issue 6
+    	 *  
+    	 *  **/
         String Nombre = txtNombre.getText().trim();
         String Apellido = txtApellido.getText().trim();
+        String Telefono = txtTelefono.getText().trim();
         String PesoF = txtPeso.getText().trim();
         String AlturaF = txtAltura.getText().trim();
         String EdadF = txtEdad.getText().trim();
-        float Peso = Float.parseFloat(PesoF);
-        float Altura = Float.parseFloat(AlturaF);
-        int Edad = Integer.parseInt(EdadF);
         String TipoSangre = (String) cmbSangre.getSelectedItem();
         String Alergias = txtAlergia.getText().trim();
         String Enfermedades = txtEnfermedad.getText().trim();
-        String Telefono = txtTelefono.getText().trim();
         
-        if("".equals(Nombre)||"".equals(Apellido)||"<Seleccione>".equals(TipoSangre)||
-                "".equals(PesoF)||"".equals(AlturaF)||"".equals(EdadF)||"".equals(Alergias)||"".equals(Enfermedades)){
-                    JOptionPane.showMessageDialog
-        (this, "Complete todos los campos y seleccione correctamente",
-                "Complete",JOptionPane.ERROR_MESSAGE);
+        if ("".equals(Nombre)) {
+        	JOptionPane.showMessageDialog(null, "Debes ingresar el nombre del Paciente","",0);
         }
-        else{
-            Paciente.Agregar_Paciente(Nombre, Apellido, Peso, Altura, Edad, Alergias, Enfermedades, TipoSangre, Telefono);
-            Limpiar();// TODO add your handling code here:
-
+        else {
+        	if ("".equals(Apellido)) {
+            	JOptionPane.showMessageDialog(null, "Debes ingresar el apellido del Paciente");
             }
-        
+            else {
+            	if ("".equals(Telefono)) {
+                	JOptionPane.showMessageDialog(null, "Debes ingresar el telefono del Paciente");
+                }
+                else {
+                	if ("".equals(PesoF)) {
+                    	JOptionPane.showMessageDialog(null, "Debes ingresar el Peso del Paciente");
+                    }
+                	else {
+                		if ("".equals(AlturaF)) {
+                        	JOptionPane.showMessageDialog(null, "Debes ingresar la Altura del Paciente");
+                        }
+                    	else {
+                    		if ("".equals(EdadF)) {
+                            	JOptionPane.showMessageDialog(null, "Debes ingresar la edad del Paciente");
+                            }
+                        	else {
+                        		if ("<Seleccione>".equals(TipoSangre)) {
+                                	JOptionPane.showMessageDialog(null, "Debes ingresar el tipo de Sangre del Paciente");
+                                }
+                        		else {
+                        			int Edad = Integer.parseInt(EdadF);
+                        	        float Peso = Float.parseFloat(PesoF);
+                        	        float Altura = Float.parseFloat(AlturaF);
+                        	        Paciente.Agregar_Paciente(Nombre, Apellido, Peso, Altura, Edad, Alergias, Enfermedades, TipoSangre, Telefono);
+                        	        Limpiar();// TODO add your handling code here:
+                        		}
+                        	}
+                    	}
+                	}
+                }
+            }
+        } 
     }
     
      public void ValidarDinero(java.awt.event.KeyEvent evt, JTextField txtPrecio) {
@@ -379,7 +425,7 @@ public class AgregarPaciente extends javax.swing.JInternalFrame {
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Guardar(); 
+    	Guardar(); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     ResultSet resultado;
@@ -404,44 +450,44 @@ Guardar();
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-Limpiar();        // TODO add your handling code here:
+    	Limpiar();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-this.dispose();        // TODO add your handling code here:
+    	this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtAlergiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlergiaKeyTyped
-if(evt.getKeyChar() == KeyEvent.VK_TAB){
-  txtEnfermedad.requestFocus();
-}// TODO add your handling code here:
+		if(evt.getKeyChar() == KeyEvent.VK_TAB){
+		  txtEnfermedad.requestFocus();
+		}// TODO add your handling code here:
     }//GEN-LAST:event_txtAlergiaKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-char a = evt.getKeyChar();
-
-if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
-    evt.consume();
-    Toolkit.getDefaultToolkit().beep();
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreKeyTyped
-
-    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-char a = evt.getKeyChar();
-
-if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
-    evt.consume();
-    Toolkit.getDefaultToolkit().beep();
-}        // TODO add your handling code here:
+		char a = evt.getKeyChar();
+		
+		if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
+		    evt.consume();
+		    Toolkit.getDefaultToolkit().beep();
+		}        // TODO add your handling code here:
+		    }//GEN-LAST:event_txtNombreKeyTyped
+		
+		    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+		char a = evt.getKeyChar();
+		
+		if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
+		    evt.consume();
+		    Toolkit.getDefaultToolkit().beep();
+		}        // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
-char a = evt.getKeyChar();
-
-if(!Character.isDigit(a)&&!Character.isISOControl(a)){
-    evt.consume();
-    Toolkit.getDefaultToolkit().beep();
-}        // TODO add your handling code here:
+		char a = evt.getKeyChar();
+		
+		if(!Character.isDigit(a)&&!Character.isISOControl(a)){
+		    evt.consume();
+		    Toolkit.getDefaultToolkit().beep();
+		}        // TODO add your handling code here:
     }//GEN-LAST:event_txtEdadKeyTyped
 
     private void txtPesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoKeyTyped
@@ -464,7 +510,7 @@ if(!Character.isDigit(a)&&!Character.isISOControl(a)){
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel16;    
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
