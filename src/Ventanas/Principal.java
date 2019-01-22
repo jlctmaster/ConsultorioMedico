@@ -498,9 +498,10 @@ public class Principal extends javax.swing.JFrame {
         int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
-            InicioSesion IS = new InicioSesion(null, false);
-            IS.setVisible(true);
-            this.dispose();
+            System.exit(0);
+        	//InicioSesion IS = new InicioSesion(null, false);
+            //IS.setVisible(true);
+            //this.dispose();
         }
 
 // TODO add your handling code here:
