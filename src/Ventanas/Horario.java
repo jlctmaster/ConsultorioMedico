@@ -11,6 +11,7 @@ import Clases.Hora_Medico;
 import Clases.Medico;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
@@ -19,7 +20,11 @@ import javax.swing.JOptionPane;
  * @author UNI
  */
 public class Horario extends javax.swing.JDialog {
-
+	//Author: Rafael Perez
+	//variable object type String, that is used to contain the hours for from
+	//date: 22/01/2019
+	 private String[] horas = new String[25];
+    
     /**
      * Creates new form Horario
      */
@@ -34,9 +39,35 @@ public class Horario extends javax.swing.JDialog {
         PanelJ.setVisible(false); 
         PanelV.setVisible(false); 
         PanelS.setVisible(false);  
-        PanelD.setVisible(false); 
+        PanelD.setVisible(false);
+        
     }
-
+    
+  //Author: Rafael Perez
+  //method that generates container of hours returns object type String
+  //date: 22/01/2019
+    public String[] fHoras()
+    {
+    	int i=0;
+        String marca,va;
+        marca = "";
+        this.horas[0] = "<Seleccione>";
+        for(i=1;i<=24;i++)
+        {
+        	if(i-1 < 12)
+        		marca = ":00 AM";
+        	if(i-1 > 12)
+        		marca = ":00 PM";
+        	if(i-1 == 12)
+        		marca = ":00 M";
+        	
+        	va = String.valueOf(i-1)+marca;
+        	this.horas[i]=va;
+        }
+        
+       
+    	return this.horas;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +132,8 @@ public class Horario extends javax.swing.JDialog {
         jLabel39 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Horario");
@@ -186,9 +219,9 @@ public class Horario extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel10.setText("Hasta");
 
-        cmbDesde.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
-        cmbHasta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbHasta.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
         jLabel11.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel11.setText("Lunes");
@@ -237,10 +270,17 @@ public class Horario extends javax.swing.JDialog {
         jLabel16.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel16.setText("Hasta");
 
-        cmbDesde2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        //cmbDesde2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
 
-        cmbHasta2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        //cmbHasta2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        
+        
+        
+        cmbDesde2.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
+        cmbHasta2.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
+
+        
         jLabel17.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel17.setText("Martes");
 
@@ -289,9 +329,9 @@ public class Horario extends javax.swing.JDialog {
         jLabel22.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel22.setText("Hasta");
 
-        cmbDesde4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde4.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
-        cmbHasta4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbHasta4.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
         jLabel23.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel23.setText("Jueves");
@@ -339,9 +379,9 @@ public class Horario extends javax.swing.JDialog {
         jLabel19.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel19.setText("Hasta");
 
-        cmbDesde3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde3.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
-        cmbHasta3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbHasta3.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
         jLabel20.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel20.setText("Miercoles");
@@ -389,9 +429,9 @@ public class Horario extends javax.swing.JDialog {
         jLabel25.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel25.setText("Hasta");
 
-        cmbDesde5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde5.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
-        cmbHasta5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbHasta5.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
         jLabel26.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel26.setText("Viernes");
@@ -439,9 +479,9 @@ public class Horario extends javax.swing.JDialog {
         jLabel28.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel28.setText("Hasta");
 
-        cmbDesde6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde6.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
-        cmbHasta6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbHasta6.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
         jLabel29.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel29.setText("Sabado");
@@ -489,9 +529,9 @@ public class Horario extends javax.swing.JDialog {
         jLabel37.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel37.setText("Hasta");
 
-        cmbDesde9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbDesde9.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
-        cmbHasta9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>", "8:00 A.M", "9:00 A.M", "10:00 A.M", "11:00 A.M", "12:00 P.M", "1:00 P.M", "2:00 P.M", "3:00 P.M", "4:00 P.M", "5:00 P.M" }));
+        cmbHasta9.setModel(new javax.swing.DefaultComboBoxModel(this.fHoras()));
 
         jLabel38.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel38.setText("Domingo");
@@ -543,11 +583,15 @@ public class Horario extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
+        
+      //Author: Rafael Perez
+      //Change aling for object jPanel1 gridBagConstraints.insets = new java.awt.Insets(6, 32, 12, 0), for jButton2;
+      //date: 22/01/2019
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 38, 12, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 1, 12, 0);
         jPanel1.add(jButton2, gridBagConstraints);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355601_sign-error.png"))); // NOI18N
@@ -557,11 +601,14 @@ public class Horario extends javax.swing.JDialog {
                 jButton3ActionPerformed(evt);
             }
         });
+      //Author: Rafael Perez
+        //Change aling for object jPanel1 gridBagConstraints.insets = new java.awt.Insets(6, 6, 12, 0) for jButton3;
+        //date: 22/01/2019
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 12, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 130, 12, 0);
         jPanel1.add(jButton3, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
