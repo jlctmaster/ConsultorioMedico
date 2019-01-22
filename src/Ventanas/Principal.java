@@ -496,15 +496,14 @@ public class Principal extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
         int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION);
-
-        if (opcion == JOptionPane.YES_OPTION) {
-            InicioSesion IS = new InicioSesion(null, false);
-            IS.setVisible(true);
-            this.dispose();
+        System.exit(0);
+        //Autor Luis Oropeza
+        // Issue #1
+        // motivo Se borra la estructura selectiva "if" para que el programa salga del sistema.
         }
 
 // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosing
+    //GEN-LAST:event_formWindowClosing
 
     public void centerJIF(JInternalFrame jif) {
         Dimension desktopSize = DesktopPane.getSize();

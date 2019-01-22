@@ -6,6 +6,8 @@
 package Ventanas;
 
 import Clases.Conexion;
+import jdk.nashorn.internal.scripts.JO;
+
 import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,10 +29,14 @@ public class InicioSesion extends javax.swing.JDialog {
      */
     public InicioSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        try {
-            this.setIconImage(new ImageIcon(getClass().getResource("/Images/dr-icon.png")).getImage());
-        } catch (NullPointerException ex) {
-        }
+        // Autor: Luis Oropeza
+        //issue #1
+        // Motivo: la imagen principal aparecia antes de poder ingresar el nombre de usuario e ingresar la contraseña
+        
+        //try {
+            //this.setIconImage(new ImageIcon(getClass().getResource("/Images/dr-icon.png")).getImage());
+        //} //catch (NullPointerException ex) {
+        //}
 
         initComponents();
         this.setResizable(false);
@@ -110,6 +116,8 @@ public class InicioSesion extends javax.swing.JDialog {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+                
+
             }
         });
 
@@ -136,7 +144,7 @@ public class InicioSesion extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUser)
                             .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))))
@@ -171,12 +179,13 @@ ResultSet resultado;
         String Pass = txtPass.getText().trim();
 
         if (!"".equals(User) || !"".equals(Pass)) {
+        	
 
             try {
                 Conexion C = new Conexion();
 
                 C.Conectar(Credenciales.UserPass.User, Credenciales.UserPass.Pass);
-            } catch (SQLException | ClassNotFoundException ex) {
+           ; } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, "Usuario/contrasena erroneo", "Error de autentificacion", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -288,6 +297,7 @@ ResultSet resultado;
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
+                        
                     }
                 });
                 dialog.setVisible(true);
