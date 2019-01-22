@@ -11,7 +11,10 @@ package Credenciales;
  */
 public class UserPass {
     
-    public static String User = "root";
-    public static String Pass = "tiburon";
+    public static String User = "admin";
+    public static String Pass = "admin";
+    public static String Host = "localhost";
+    public static String DBName = "Clinica";
+    public static String Port = "3306";
     
 }

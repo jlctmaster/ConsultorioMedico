@@ -14,9 +14,11 @@ public void Conectar(String user,String pass)throws SQLException,ClassNotFoundEx
     
 //    try {
             // Get connection
+	
+			String uriconection = "jdbc:mysql://"+Credenciales.UserPass.Host+"/"+Credenciales.UserPass.DBName;
             
             DriverManager.registerDriver( new com.mysql.jdbc.Driver());
-            con = DriverManager.getConnection("jdbc:mysql://localhost/Clinica", user, pass);
+            con = DriverManager.getConnection(uriconection, user, pass);
 
 //            if (con!= null) {
 //                      
