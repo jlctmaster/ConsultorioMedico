@@ -493,6 +493,15 @@ public class Principal extends javax.swing.JFrame {
         centerJIF(PG); // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
+    /*David Castillo
+     * Issue #8
+     *Creación de méodo para ver la ventana ver usuarios
+     */
+    public static void verusuarios() {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        VerUsuario VU = new VerUsuario();
+        DesktopPane.add(VU);
+        centerJIF(VU);   // TODO add your handling code here:
+    }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
         int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION);
@@ -506,7 +515,8 @@ public class Principal extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
-    public void centerJIF(JInternalFrame jif) {
+    //Ver usuarios
+    public static void centerJIF(JInternalFrame jif) {
         Dimension desktopSize = DesktopPane.getSize();
         Dimension jInternalFrameSize = jif.getSize();
         int width = (desktopSize.width - jInternalFrameSize.width) / 2;
@@ -545,7 +555,9 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+              //  new Principal().setVisible(true);
+            	InicioSesion IS = new InicioSesion(null, false);
+                IS.setVisible(true);
             }
         });
     }
@@ -554,7 +566,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem AgregarPaciente;
     private javax.swing.JMenu Cita;
     private javax.swing.JMenu Consulta;
-    private javax.swing.JDesktopPane DesktopPane;
+    private static javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenu Especialidad;
     private javax.swing.JMenu Medico;
     private javax.swing.JMenu Paciente;

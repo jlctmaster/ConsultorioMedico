@@ -6,6 +6,12 @@
 package Ventanas;
 
 import Clases.Usuario;
+/*import Clases.Panel_Fondo;
+
+import java.awt.Dimension;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;*/
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author UNI
  */
 public class AgregarUsuario extends javax.swing.JDialog {
-
+	private javax.swing.JDesktopPane DesktopPane;
     /**
      * Creates new form SeleccionarSemana
      */
@@ -39,6 +45,8 @@ public class AgregarUsuario extends javax.swing.JDialog {
         txtPass = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         cmbTipo = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Usuario");
@@ -47,12 +55,26 @@ public class AgregarUsuario extends javax.swing.JDialog {
                 formWindowOpened(evt);
             }
         });
-
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355589_floppy.png")));
+        jButton3.setText("Modificar Contraseña");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355589_floppy.png")));
+        jButton4.setText("Salir");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355601_sign-error.png")));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355589_floppy.png"))); // NOI18N
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -74,12 +96,17 @@ public class AgregarUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
+                    .addComponent(jButton2) 
+                    .addComponent(jButton4)
+                    
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3)
+                            )
+                        
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUser)
@@ -92,6 +119,7 @@ public class AgregarUsuario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                	
                     .addComponent(jLabel3)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -101,13 +129,19 @@ public class AgregarUsuario extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    )
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18,18,18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                	  .addComponent(jButton2)
+                      .addComponent(jButton3))
+                 .addGap(10,10,10)
+                .addComponent(jButton4)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(410, 240));
+        setSize(new java.awt.Dimension(450, 280));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,7 +152,17 @@ public class AgregarUsuario extends javax.swing.JDialog {
         this.txtUser.setText(NombreUsuario);
     }
     
-    
+    /*David
+     * issue 8
+     * botón modificar
+     
+     */ 
+        private void Modificar() { 
+    	Principal.verusuarios();
+    	this.dispose();
+           
+    }
+        
     
     public void Guardar(){
         String Nombre = txtUser.getText().trim();
@@ -140,6 +184,19 @@ public class AgregarUsuario extends javax.swing.JDialog {
         
         Usuario.Agregar_Usuario(Nombre, Pass, Role);
         this.dispose();
+    }
+    /* Nombre: David Castillo.
+     * Issue:#8
+     * Motive: No había  botón de salir :V
+     */
+    private void salir() {
+    	this.dispose();
+    }
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+    salir();	
+    }
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+    Modificar();
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -209,5 +266,8 @@ public class AgregarUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
+    private javax.swing.JButton jButton3;
+    
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }

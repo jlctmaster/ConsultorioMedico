@@ -9,11 +9,11 @@ package Credenciales;
  *
  * @author Reymundo Tenorio Q
  */
-public class UserPass {
+public class UserPassExample {
     
     public static String User = "admin";
     public static String Pass = "admin";
-    public static String Host = "localhost";
+    public static String Host = "192.168.1.33";
     public static String DBName = "Clinica";
     public static String Port = "3306";
     
