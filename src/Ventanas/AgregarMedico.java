@@ -7,7 +7,11 @@ package Ventanas;
 
 import Clases.Conexion;
 import Clases.Medico;
+import net.sf.jasperreports.engine.util.MaxFontSizeFinder;
+
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
@@ -18,6 +22,10 @@ import javax.swing.JOptionPane;
  * @author UNI
  */
 public class AgregarMedico extends javax.swing.JInternalFrame {
+	
+	
+	private boolean saved = false;
+	private int ID_M;
 
     /**
      * Creates new form AgregarDoctor
@@ -43,6 +51,7 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
         txtApellido = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         cmbEspecialidad = new javax.swing.JComboBox();
+        btnGuardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -69,10 +78,17 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
         });
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 2, 0, 12));
+        
+        /**Author: acastellanos
+         * Issue: #4
+         * Motive: Se agrego el caracter * para indicar que es un campo oblicatorio
+         * **/
 
         jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel7.setText("Nombres");
-        jPanel2.add(jLabel7);
+        jLabel7.setText("Nombres (*)");
+        jPanel2.add(jLabel7); 
+        
+      
 
         txtNombre.setDoubleBuffered(true);
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -83,7 +99,7 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
         jPanel2.add(txtNombre);
 
         jLabel10.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel10.setText("Apellidos");
+        jLabel10.setText("Apellidos (*)");
         jPanel2.add(jLabel10);
 
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -99,6 +115,24 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
 
         cmbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Seleccione>" }));
         jPanel2.add(cmbEspecialidad);
+        
+        /**Author: acastellanos
+         * Issue: #4
+         * Motive: se agrego el boton guardar
+         * **/
+        
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355589_floppy.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+
+			private void btnGuardarActionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				Guardar();
+			}
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355686_pencil.png"))); // NOI18N
         jButton1.setText("Nuevo");
@@ -108,8 +142,21 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
             }
         });
 
+        
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435357592_Timetable.png"))); // NOI18N
+        
+        
+        /**Author: acastellanos
+         * Issue: #4
+         * Motive: se agrego una validacion para el texto del boton
+         * **/
+        
+        if(saved==false) 
         jButton2.setText("Agregar Horario");
+        else 
+        jButton2.setText("Modificar Horario");
+        
+        
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -131,7 +178,9 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                    	.addContainerGap()
+                        .addComponent(btnGuardar)
+                        .addGap(10, 10, 10)
                         .addComponent(jButton1)
                         .addGap(10, 10, 10)
                         .addComponent(jButton2)
@@ -149,7 +198,8 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                	.addComponent(btnGuardar)
+                	.addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap())
@@ -160,7 +210,71 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
         setBounds(0, 0, 684, 349);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void Guardar(){
+    /**Author: acastellanos
+     * Issue: #4
+     * Motive: create this method for save doctor
+     * **/
+   
+    public void Guardar() {
+    	String Nombre = txtNombre.getText().trim();
+        String Apellido = txtApellido.getText().trim();
+        int cmbEsp = cmbEspecialidad.getSelectedIndex();
+        int ID_Especialidad = ID_Esp[cmbEsp];
+        if("".equals(Nombre)||"".equals(Apellido)||cmbEsp==0)
+            //||"<Seleccione>".equals(HoraFinal)
+       //     ||"<Seleccione>".equals(HoraInicio))
+    {
+                JOptionPane.showMessageDialog
+    (this, "Complete todos los campos y seleccione correctamente",
+            "Complete",JOptionPane.ERROR_MESSAGE);
+    }else {
+    	if(this.saved==false) {
+    	 Medico.Agregar_Medico(Nombre, Apellido, ID_Especialidad);
+    	}
+    	
+    	 int ID_MaxM = 0 ;
+    	 try {
+         	ResultSet rs =Conexion.consulta("SELECT MAX(ID_Medico) FROM Medico");
+         	while(rs.next()) {
+         		ID_MaxM=rs.getInt(1);
+         	}
+         	}catch(Exception e) {
+         		
+         	}  
+    	
+    	 if(this.saved==true) {
+    		 Medico.Actualizar_Medico(ID_MaxM, Nombre, Apellido, ID_Especialidad);
+    	 }
+    	 if(this.saved==false) {
+    	 
+    	 String Name = Nombre.toLowerCase()+ID_MaxM;
+    	 AgregarUsuarioMedico AUM = new AgregarUsuarioMedico(null, true);
+         AUM.setNombreUsuario(Name);
+         AUM.setVisible(true);
+         int ID_MaxU = 0 ;
+         try{
+             resultado = Conexion.consulta("Select Max(ID_Usuario) from Usuario");
+             
+             while(resultado.next()){
+                 ID_MaxU = resultado.getInt(1);
+             }
+              
+          }catch(SQLException ex){}
+           
+        
+          Medico.Usuario_Medico(ID_MaxM, ID_MaxU, Name);   
+          this.ID_M = ID_MaxM ;
+          }
+    	 this.saved=true;
+    	 jButton2.setText("Modificar Horario");
+    }
+        
+    }
+    /**Author: acastellanos
+     * Issue: #4
+     * Motive: Change the method 
+     * **/
+    public void GuardarHorario(){
         String Nombre = txtNombre.getText().trim();
         String Apellido = txtApellido.getText().trim();
         int cmbEsp = cmbEspecialidad.getSelectedIndex();
@@ -197,23 +311,39 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
                 "Complete",JOptionPane.ERROR_MESSAGE);
         }
         else{
-          
-            
+            if(this.saved==false) {
             Horario H = new Horario(null, true);
             H.setAM(this);
             H.setNombre(Nombre);
             H.setApellido(Apellido);
             H.setID_Especialidad(ID_Especialidad);
             H.setVisible(true);
-            
+            }else {
+            	/*int IDD=0;
+            	try {
+            	ResultSet rs =Conexion.consulta("SELECT MAX(ID_Medico) FROM Medico");
+            	while(rs.next()) {
+            		IDD=rs.getInt(0);
+            	}
+            	}catch(Exception e) {
+            		
+            	}    */   	
+            	 ModificarHorario MH = new ModificarHorario(null, true);
+                 MH.setID(this.ID_M);
+                 MH.CargarDatos(this.ID_M);
+                 MH.setVisible(true);
+            }
        //     Limpiar();// TODO add your handling code here:
 
             }
         
     }
-    
+    /**Author: acastellanos
+     * Issue: #4
+     * Motive: change save method
+     * **/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Guardar(); 
+GuardarHorario(); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     ResultSet resultado;
@@ -263,12 +393,16 @@ Guardar();
 
 // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameOpened
-
+/**Author: acastellanos
+ * Issue: #4
+ * Motive: Save doctor before clear fields
+ * **/
     public void Limpiar(){
         txtApellido.setText("");
         txtNombre.setText("");
 //        cmbDesde.setSelectedIndex(0);
         cmbEspecialidad.setSelectedIndex(0);
+        this.saved=false;
   /*     cmbHasta.setSelectedIndex(0);
         ckD.setSelected(false);
         ckJ.setSelected(false);
@@ -278,9 +412,14 @@ Guardar();
         ckV.setSelected(false);
         ckX.setSelected(false);*/
     }
-    
+    /**Author: acastellanos
+     * Issue: #4
+     * Motive: Clear fields after save doctor
+     * **/
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-Limpiar();        // TODO add your handling code here:
+    	Guardar();
+    	Limpiar();        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -305,10 +444,14 @@ if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
 }        // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoKeyTyped
 
-
+    /**Author: acastellanos
+     * Issue: #4
+     * Motive: Add save button
+     * **/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbEspecialidad;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
