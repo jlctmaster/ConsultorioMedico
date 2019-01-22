@@ -20,13 +20,14 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal(String NombreUsuario) {
 
         try {
             this.setIconImage(new ImageIcon(getClass().getResource("/Images/dr-icon.png")).getImage());
         } catch (NullPointerException ex) {
         }
 
+    	UserName = "Bienvenido: " + NombreUsuario;
         initComponents();
         //    this.setResizable(false);
 
@@ -39,6 +40,7 @@ public class Principal extends javax.swing.JFrame {
         Pago.setVisible(false);
         Usuario.setVisible(false);
         Reporte.setVisible(false);
+        Sesion.setVisible(false);
 
     }
 
@@ -47,7 +49,17 @@ public class Principal extends javax.swing.JFrame {
     static void setID_Usuario(int ID_Usuario) {
         Principal.ID_Usuario = ID_Usuario;
     }
-
+    //Creacion Nombre Usuario para inicio de sesion, issue #2 Mairelis Malaga
+    private String UserName;
+    public void setUserName(String UserName )
+    {
+    	this.UserName = UserName;
+    }
+    
+    public String getUserName() {
+    	return this.UserName;
+    }
+    //
     public void Iniciar(String Rol) {
 
         if ("Caja".equals(Rol)) {
@@ -80,6 +92,8 @@ public class Principal extends javax.swing.JFrame {
             Usuario.setVisible(true);
             Reporte.setVisible(true);
         }
+        
+        Sesion.setVisible(true);
 
 //        this.setVisible(true);
 //        this.toFront();
@@ -123,7 +137,9 @@ public class Principal extends javax.swing.JFrame {
         Reporte = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-
+        Sesion = new javax.swing.JMenu();
+        jMenuItem19= new javax.swing.JMenuItem();
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Principal");
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -369,8 +385,33 @@ public class Principal extends javax.swing.JFrame {
         Reporte.add(jMenuItem9);
 
         jMenuBar1.add(Reporte);
+        
+        /**
+         * Mairelis Malaga issue #2, Cerrar Sesion
+         */
+        Sesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cerrarsesion.jpg"))); // NOI18N
+        Sesion.setText(UserName);
+        Sesion.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        
+        jMenuItem19.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1439253074_power_off.png"))); // NOI18N
+        jMenuItem19.setText("Cerrar Sesion");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	int opcion = JOptionPane.showConfirmDialog(DesktopPane, "Esta seguro que desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION); //.showInternalConfirmDialog(evt, "Esta seguro que desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION);
 
+                if (opcion == JOptionPane.YES_OPTION) {
+                    InicioSesion IS = new InicioSesion(null, false);
+                    IS.setVisible(true);
+                    dispose();
+                }
+            }
+        });
+        Sesion.add(jMenuItem19);
+        jMenuBar1.add(Sesion);
+        
         setJMenuBar(jMenuBar1);
+      
 
         pack();
         setLocationRelativeTo(null);
@@ -545,7 +586,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Principal("").setVisible(true);
             }
         });
     }
@@ -562,6 +603,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu Reporte;
     private javax.swing.JMenu Servicio;
     private javax.swing.JMenu Usuario;
+    private javax.swing.JMenu Sesion;
     private javax.swing.JMenuItem VerConsulta;
     private javax.swing.JMenuItem VerMedico;
     private javax.swing.JMenuBar jMenuBar1;
@@ -573,6 +615,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

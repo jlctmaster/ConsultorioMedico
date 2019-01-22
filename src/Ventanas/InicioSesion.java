@@ -183,15 +183,17 @@ ResultSet resultado;
             }
             int ID_Usuario = 0;
             String Rol = "";
+            String NombreUsuario = "";
 
             try {
-
-                resultado = Conexion.consulta("Select ID_Usuario, Rol_Usuario from Usuario where Nombre_Usuario = '" + User + "' "
+            	//Agrego Nombre Usuari en la consulta issue #2 Mairelis Malaga 
+                resultado = Conexion.consulta("Select ID_Usuario, Rol_Usuario, Nombre_Usuario from Usuario where Nombre_Usuario = '" + User + "' "
                         + " and Contrasena_Usuario = '" + Pass + "' and Estado = " + true);
 
                 while (resultado.next()) {
                     ID_Usuario = resultado.getInt(1);
                     Rol = resultado.getString(2);
+                    NombreUsuario = resultado.getString(3);
 
                 }
 
@@ -203,11 +205,10 @@ ResultSet resultado;
                 return;
             }
 
-            Principal P = new Principal();
+            Principal P = new Principal(NombreUsuario.trim());
             Principal.setID_Usuario(ID_Usuario);
             P.Iniciar(Rol.trim());
             this.setVisible(false);
-
             P.setVisible(true);
             P.toFront();
 
