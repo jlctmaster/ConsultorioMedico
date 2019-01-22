@@ -9,7 +9,7 @@ package Credenciales;
  *
  * @author Reymundo Tenorio Q
  */
-public class UserPass {
+public class UserPassExample {
     
     public static String User = "admin";
     public static String Pass = "admin";
