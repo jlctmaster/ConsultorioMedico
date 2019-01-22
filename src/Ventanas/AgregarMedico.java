@@ -10,14 +10,11 @@ import Clases.Medico;
 import net.sf.jasperreports.engine.util.MaxFontSizeFinder;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
-
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -136,9 +133,6 @@ public class AgregarMedico extends javax.swing.JInternalFrame {
 				Guardar();
 			}
         });
-        
-       
-        
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1435355686_pencil.png"))); // NOI18N
         jButton1.setText("Nuevo");
