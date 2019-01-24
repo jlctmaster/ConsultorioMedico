@@ -27,7 +27,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (NullPointerException ex) {
         }
 
-    	UserName = "Bienvenido: " + NombreUsuario;
+    	UserName =  "Bienvenido: " + NombreUsuario;
         initComponents();
         //    this.setResizable(false);
 

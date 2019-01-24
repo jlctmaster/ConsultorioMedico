@@ -80,7 +80,7 @@ public class InicioSesion extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Iniciar Sesion");
+        setTitle("Iniciar Sesion ");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
