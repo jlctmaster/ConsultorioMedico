@@ -7,6 +7,8 @@ package Ventanas;
 
 import Clases.Especialidad;
 import Clases.Servicio;
+
+import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
@@ -44,13 +46,13 @@ public class AgregarServicio extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-
+        
         setClosable(true);
         setIconifiable(true);
         setTitle("Agregar Servicio");
 
         jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel7.setText("Nombre");
+        jLabel7.setText("Nombre (*)");
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -66,8 +68,8 @@ public class AgregarServicio extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtDescripcion);
 
         jLabel8.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel8.setText("Precio");
-
+        jLabel8.setText("Precio (*)");
+        
         txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioKeyTyped(evt);
@@ -171,8 +173,10 @@ public class AgregarServicio extends javax.swing.JInternalFrame {
         String Nombre = txtNombre.getText().trim();
         String Descripcion = txtDescripcion.getText().trim();
         String PrecioF = txtPrecio.getText().trim();
+
+        //        if ("".equals(Nombre) || "".equals(Descripcion) || "".equals(PrecioF)) {
         
-        if ("".equals(Nombre) || "".equals(Descripcion) || "".equals(PrecioF)) {
+        if ("".equals(Nombre) || "".equals(PrecioF)) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos", "Complete", JOptionPane.ERROR_MESSAGE);
             
         } else {
@@ -198,7 +202,8 @@ public class AgregarServicio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Limpiar();        // TODO add your handling code here:
+    	Guardar();
+    	Limpiar();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
     
     public void ValidarDinero(java.awt.event.KeyEvent evt) {
@@ -275,5 +280,6 @@ if(!Character.isLetter(a)&&!Character.isISOControl(a)&&a!=' '){
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JLabel jLabel14;
     // End of variables declaration//GEN-END:variables
 }
